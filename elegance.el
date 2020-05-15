@@ -29,12 +29,12 @@
 ;; -------------------------------------------------------------------
 
 ;; Default font and frame size
-(set-face-font 'default "Roboto Mono Light 14")
+(set-face-font 'default "Input")
 (setq default-frame-alist
       (append (list '(width  . 73) '(height . 41)
                     '(vertical-scroll-bars . nil)
                     '(internal-border-width . 24)
-                    '(font . "Roboto Mono Light 14"))))
+                    '(font . "Input"))))
 (set-frame-parameter (selected-frame)
                      'internal-border-width 24)
 
@@ -370,8 +370,9 @@ function is a convenience wrapper used by `describe-package-1'."
 ;; (defun mode-line-render (left right)
 ;;   "Return a string of `window-width' length containing left, and
 ;;    right aligned respectively."
-;;   (let* ((available-width (- (window-total-width) (length left) )))
+;;   (let* ((available-width (- (/ (window-pixel-width) (window-font-width nil 'header-line)) (length left))))
 ;;     (format (format "%%s %%%ds" available-width) left right)))
+
 ;; (define-key mode-line-major-mode-keymap [header-line]
 ;;   (lookup-key mode-line-major-mode-keymap [mode-line]))
 
@@ -380,17 +381,12 @@ function is a convenience wrapper used by `describe-package-1'."
 ;;   '(:eval (mode-line-render
 ;;    (format-mode-line
 ;;     (list
-;;      (propertize "☰"
-;;                  'face `(:weight regular)
-;;                  'mouse-face 'header-line-highlight
-;;                  'help-echo  "Major mode menu"
-;;                  'local-map   mode-line-major-mode-keymap)
 ;;      " %b "
 ;;      '(:eval (if (and buffer-file-name (buffer-modified-p))
 ;;                  (propertize "(modified)"
 ;;               'face `(:foreground ,(face-foreground 'face-faded)))))))
 ;;    (format-mode-line
-;;     (propertize "%3l:%2c "
+;;     (propertize "%4l:%3c "
 ;; 	'face `(:foreground ,(face-foreground 'face-faded)))))))
 
 
