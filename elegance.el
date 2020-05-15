@@ -29,12 +29,12 @@
 ;; -------------------------------------------------------------------
 
 ;; Default font and frame size
-(set-face-font 'default "Input")
-(setq default-frame-alist
-      (append (list '(width  . 73) '(height . 41)
-                    '(vertical-scroll-bars . nil)
-                    '(internal-border-width . 24)
-                    '(font . "Input"))))
+;; (set-face-font 'default "Input")
+;; (setq default-frame-alist
+;;       (append (list '(width  . 73) '(height . 41)
+;;                     '(vertical-scroll-bars . nil)
+;;                     '(internal-border-width . 24)
+;;                     '(font . "Input"))))
 (set-frame-parameter (selected-frame)
                      'internal-border-width 24)
 
@@ -346,48 +346,48 @@ function is a convenience wrapper used by `describe-package-1'."
                          :foreground "#FFEE58" :background "#FFF9C4"))
 
 
-;; ;; Header and mode line
-;; (set-face-attribute 'header-line nil
-;; 		    :height 140
-;;                     :underline t
-;;                     :underline (face-foreground 'default)
-;; 		    :weight 'light
-;;                     :foreground (face-foreground 'default)
-;; 		    :background (face-background 'default)
-;;                     :box `(:line-width 3
-;;                            :color ,(face-background 'default)
-;;                            :style nil))
-;; (set-face-attribute 'mode-line nil
-;;                     :height 10
-;;                     :underline (face-foreground 'default)
-;;                     :background (face-foreground 'default)
-;; 		    :foreground (face-foreground 'default)
-;;                     :box nil)
-;; (set-face 'mode-line-inactive 'mode-line)
-;; (set-face 'mode-line-buffer-id 'default)
-;; (set-face 'header-line-highlight '(face-faded header-line))
+;; Header and mode line
+(set-face-attribute 'header-line nil
+		    :height 140
+                    :underline t
+                    :underline (face-foreground 'default)
+		    :weight 'light
+                    :foreground (face-foreground 'default)
+		    :background (face-background 'default)
+                    :box `(:line-width 3
+                           :color ,(face-background 'default)
+                           :style nil))
+(set-face-attribute 'mode-line nil
+                    :height 10
+                    :underline (face-foreground 'default)
+                    :background (face-foreground 'default)
+		    :foreground (face-foreground 'default)
+                    :box nil)
+(set-face 'mode-line-inactive 'mode-line)
+(set-face 'mode-line-buffer-id 'default)
+(set-face 'header-line-highlight '(face-faded header-line))
 
-;; (defun mode-line-render (left right)
-;;   "Return a string of `window-width' length containing left, and
-;;    right aligned respectively."
-;;   (let* ((available-width (- (/ (window-pixel-width) (window-font-width nil 'header-line)) (length left))))
-;;     (format (format "%%s %%%ds" available-width) left right)))
+(defun mode-line-render (left right)
+  "Return a string of `window-width' length containing left, and
+   right aligned respectively."
+  (let* ((available-width (- (/ (window-pixel-width) (window-font-width nil 'header-line)) (length left))))
+    (format (format "%%s %%%ds" available-width) left right)))
 
-;; (define-key mode-line-major-mode-keymap [header-line]
-;;   (lookup-key mode-line-major-mode-keymap [mode-line]))
+(define-key mode-line-major-mode-keymap [header-line]
+  (lookup-key mode-line-major-mode-keymap [mode-line]))
 
-;; (setq-default mode-line-format '(""))
-;; (setq-default header-line-format
-;;   '(:eval (mode-line-render
-;;    (format-mode-line
-;;     (list
-;;      " %b "
-;;      '(:eval (if (and buffer-file-name (buffer-modified-p))
-;;                  (propertize "(modified)"
-;;               'face `(:foreground ,(face-foreground 'face-faded)))))))
-;;    (format-mode-line
-;;     (propertize "%4l:%3c "
-;; 	'face `(:foreground ,(face-foreground 'face-faded)))))))
+(setq-default mode-line-format '(""))
+(setq-default header-line-format
+  '(:eval (mode-line-render
+   (format-mode-line
+    (list
+     " %b "
+     '(:eval (if (and buffer-file-name (buffer-modified-p))
+                 (propertize "(modified)"
+              'face `(:foreground ,(face-foreground 'face-faded)))))))
+   (format-mode-line
+    (propertize "%4l:%3c  "
+	'face `(:foreground ,(face-foreground 'face-faded)))))))
 
 
 (provide 'elegance)
